@@ -1,0 +1,29 @@
+version: '2'
+
+services:
+  app:
+    image: 'demo:prozorro'
+    build:
+      context: .
+    container_name: app
+    expose:
+      - 8083
+    ports:
+      - 8083:8083
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/postgres
+      - SPRING_DATASOURCE_USERNAME=compose-postgres
+      - SPRING_DATASOURCE_PASSWORD=compose-postgres
+
+  db:
+    image: 'postgres:13.1-alpine'
+    container_name: db
+    expose:
+      - 5432
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=compose-postgres
+      - POSTGRES_PASSWORD=compose-postgres

@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd
+http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-3.8.xsd">
+    <changeSet id="202105131459" author="Anton Sapozhnikov">
+        <comment>Create user, roles and user_roles</comment>
+        <createTable tableName="app_user">
+            <column name="id" type="int">
+                <constraints primaryKey="true" primaryKeyName="user_id_pk"/>
+            </column>
+            <column name="name"     type="varchar(255)"/>
+            <column name="password" type="varchar(255)"/>
+        </createTable>
+
+        <createTable tableName="app_role">
+            <column name="id" type="int">
+                <constraints primaryKey="true" primaryKeyName="role_id_pk" />
+            </column>
+            <column name="role" type="varchar(255)" />
+        </createTable>
+
+        <createTable tableName="app_user_role">
+            <column name="user_id" type="int"/>
+            <column name="role_id" type="int" />
+        </createTable>
+
+        <addUniqueConstraint tableName="app_user" columnNames="name"/>
+        <addUniqueConstraint tableName="app_user_role" columnNames="user_id, role_id"/>
+    </changeSet>
+
+    <changeSet id="202105131500" author="Anton Sapozhnikov">
+        <comment>Create section and groups</comment>
+        <createTable tableName="app_section">
+            <column name="id" type="varchar(255)">
+                <constraints primaryKey="true" primaryKeyName="section_id_pk" />
+            </column>
+            <column name="description" type="varchar(255)"/>
+        </createTable>
+
+        <createTable tableName="app_group">
+            <column name="id" type="varchar(255)">
+                <constraints primaryKey="true" primaryKeyName="group_id_pk" />
+            </column>
+            <column name="section_id" type="varchar(255)" />
+            <column name="description" type="varchar(255)" />
+        </createTable>
+    </changeSet>
+
+
+
+    <changeSet id="202105131501" author="Anton Sapozhnikov">
+        <loadData tableName="app_role" file="db/changelog/data/role.csv" separator=","/>
+        <loadData tableName="app_user" file="db/changelog/data/user.csv" separator=","/>
+        <loadData tableName="app_user_role" file="db/changelog/data/user_role.csv" separator=","/>
+    </changeSet>
+</databaseChangeLog>

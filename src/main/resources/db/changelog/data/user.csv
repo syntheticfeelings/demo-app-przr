@@ -1,0 +1,4 @@
+"id","name","password"
+1,"jane","{bcrypt}$2a$10$bO96jr9noz5gBgU4fIDlueq/VDAgEtMVvOFPEyFmNMUzegU1Z/WKC"
+2,"john","{bcrypt}$2a$10$bO96jr9noz5gBgU4fIDlueq/VDAgEtMVvOFPEyFmNMUzegU1Z/WKC"
+3,"jack","{bcrypt}$2a$10$bO96jr9noz5gBgU4fIDlueq/VDAgEtMVvOFPEyFmNMUzegU1Z/WKC"

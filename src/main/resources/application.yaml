@@ -1,0 +1,30 @@
+# application config
+spring:
+    application:
+      name: classifiers service
+    datasource:
+      url: jdbc:postgresql://localhost:5432/postgres
+      username: compose-postgres
+      password: compose-postgres
+      driver-class-name: org.postgresql.Driver
+    liquibase:
+        change-log: classpath:db/changelog/db.changelog-master.xml
+
+server:
+    port: 8083
+    servlet:
+      context-path: /api
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: info, health, liquibase, shutdown, startup
+
+logging:
+  level:
+    org.springframework.web: TRACE
+
+classifiers:
+  apiUrl: https://prozorroukr.github.io/standards/classifiers/dk021_uk.json
+  batchSize: 100

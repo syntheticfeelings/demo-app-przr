@@ -1,0 +1,12 @@
+# application config
+spring:
+  application:
+    name: classifiers service
+  datasource:
+    url: jdbc:hsqldb:mem:test;DB_CLOSE_DELAY=-1
+    driver-class-name: org.hsqldb.jdbc.JDBCDriver
+  liquibase:
+    change-log: classpath:db/changelog/db.changelog-master-for-tests.xml
+
+
+
