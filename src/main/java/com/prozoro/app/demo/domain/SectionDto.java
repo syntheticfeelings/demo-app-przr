@@ -14,6 +14,5 @@ import java.util.List;
 public class SectionDto {
     private String id;
     private String description;
-    @JsonInclude(Include.NON_NULL)
-    private List<GroupDto> groups;
+    private String parent;
 }

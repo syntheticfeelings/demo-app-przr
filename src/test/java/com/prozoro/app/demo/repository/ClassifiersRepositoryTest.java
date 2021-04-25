@@ -1,6 +1,5 @@
 package com.prozoro.app.demo.repository;
 
-import com.prozoro.app.demo.domain.GroupDto;
 import com.prozoro.app.demo.domain.SectionDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -29,11 +28,6 @@ public class ClassifiersRepositoryTest {
         Assertions.assertNotNull(section);
     }
 
-    @Test
-    public void findGroupDto() {
-        List<GroupDto> section = classifiersRepository.findGroupDto("03");
-        Assertions.assertNotNull(section);
-    }
 
 
 }

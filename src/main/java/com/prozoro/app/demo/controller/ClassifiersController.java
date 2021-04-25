@@ -1,7 +1,6 @@
 package com.prozoro.app.demo.controller;
 
 
-import com.prozoro.app.demo.domain.GroupDto;
 import com.prozoro.app.demo.service.ClassifiersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -12,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.security.RolesAllowed;
-import java.util.List;
 
 
 @RestController
@@ -21,7 +19,6 @@ public class ClassifiersController {
 
     @Autowired
     private ClassifiersService service;
-
 
     @RolesAllowed("ROLE_ADMIN")
     @GetMapping("/update")
@@ -40,13 +37,5 @@ public class ClassifiersController {
     @GetMapping("/section/{sectionId}")
     public ResponseEntity getSection(@PathVariable("sectionId") String sectionId) {
         return ResponseEntity.ok(service.findSectionDto(sectionId));
-    }
-
-    @RolesAllowed({"ROLE_ADMIN", "ROLE_VIEWER"})
-    @GetMapping("/groups/{sectionId}")
-    public ResponseEntity getGroups(@PathVariable("sectionId") String sectionId) {
-        List<GroupDto> groupDto = service.findGroupDto(sectionId);
-        return ResponseEntity.ok(groupDto);
-
     }
 }

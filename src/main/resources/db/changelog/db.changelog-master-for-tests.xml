@@ -8,7 +8,6 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
 
     <changeSet id="202105131501" author="Anton Sapozhnikov">
         <loadData tableName="app_section" file="db/changelog/data/section.csv" separator=","/>
-        <loadData tableName="app_group" file="db/changelog/data/group.csv" separator=","/>
     </changeSet>
     <include file="db/changelog/db.changelog-1.0.xml"/>
 

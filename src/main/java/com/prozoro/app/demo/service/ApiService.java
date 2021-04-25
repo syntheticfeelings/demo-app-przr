@@ -1,6 +1,5 @@
 package com.prozoro.app.demo.service;
 
-import com.prozoro.app.demo.domain.GroupDto;
 import com.prozoro.app.demo.domain.SectionDto;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.regex.Pattern;
 
 @Slf4j
 @Service
@@ -37,13 +39,16 @@ public class ApiService {
         data.forEach((code, description) -> {
             String sectionCode = code.substring(0, 2);
 
-            if (sections.get(sectionCode) == null) {
-                SectionDto section = new SectionDto(code, description, new ArrayList<>());
-                sections.put(sectionCode, section);
-            } else {
-                SectionDto section = sections.get(sectionCode);
-                section.getGroups().add(new GroupDto(code, section.getId(), description));
+            if(code.matches("\\d{0,2}[0]{6}..")){
+                SectionDto section = new SectionDto(code, description, "00");
+                sections.put(code, section);
             }
+            if (code.matches("...[0]{5}..")&&!code.matches("\\d{0,2}[0]{6}..")) {
+                SectionDto section = new SectionDto(code, description, sectionCode);
+                sections.put(code, section);
+            }
+
+            //TODO написать реальзацию
         });
         log.info("transform data finished");
         return sections.values();

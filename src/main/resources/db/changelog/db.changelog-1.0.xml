@@ -32,21 +32,15 @@ http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibas
     </changeSet>
 
     <changeSet id="202105131500" author="Anton Sapozhnikov">
-        <comment>Create section and groups</comment>
+        <comment>Create app_section</comment>
         <createTable tableName="app_section">
             <column name="id" type="varchar(255)">
                 <constraints primaryKey="true" primaryKeyName="section_id_pk" />
             </column>
             <column name="description" type="varchar(255)"/>
+            <column name="parent" type="varchar(255)"/>
         </createTable>
 
-        <createTable tableName="app_group">
-            <column name="id" type="varchar(255)">
-                <constraints primaryKey="true" primaryKeyName="group_id_pk" />
-            </column>
-            <column name="section_id" type="varchar(255)" />
-            <column name="description" type="varchar(255)" />
-        </createTable>
     </changeSet>
 
 
