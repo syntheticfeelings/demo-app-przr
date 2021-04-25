@@ -38,4 +38,10 @@ public class ClassifiersController {
     public ResponseEntity getSection(@PathVariable("sectionId") String sectionId) {
         return ResponseEntity.ok(service.findSectionDto(sectionId));
     }
+
+    @RolesAllowed({"ROLE_ADMIN", "ROLE_VIEWER"})
+    @GetMapping("/parent/{parentId}")
+    public ResponseEntity getSectionByParent(@PathVariable("parentId") String parentId) {
+        return ResponseEntity.ok(service.findSectionDtoByParent(parentId));
+    }
 }

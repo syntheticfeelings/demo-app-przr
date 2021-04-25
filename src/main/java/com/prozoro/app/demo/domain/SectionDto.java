@@ -6,13 +6,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
 @AllArgsConstructor
 @Builder
 public class SectionDto {
     private String id;
     private String description;
+    @JsonInclude(Include.NON_NULL)
     private String parent;
 }

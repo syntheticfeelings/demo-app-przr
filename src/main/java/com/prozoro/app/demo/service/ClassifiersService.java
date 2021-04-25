@@ -42,6 +42,11 @@ public class ClassifiersService {
         return sectionDto;
     }
 
+    @Transactional
+    public List<SectionDto> findSectionDtoByParent(String parentId) {
+        List<SectionDto> sectionDto = repository.findSectionDtoByParent(parentId);
+        return sectionDto;
+    }
 
     private void batchSectionUpdate(Collection<SectionDto> classifiers) {
         log.info("update section ...");

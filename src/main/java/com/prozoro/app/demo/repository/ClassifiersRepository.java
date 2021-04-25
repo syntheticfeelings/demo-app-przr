@@ -7,7 +7,6 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.List;
@@ -20,10 +19,6 @@ public class ClassifiersRepository {
             "VALUES (?,?,?) " +
             "ON CONFLICT (id) DO UPDATE SET description = EXCLUDED.description, parent = EXCLUDED.parent;";
 
-    private static final String UPDATE_GROUP = "INSERT INTO app_group (id, section_id, description) " +
-            "VALUES (?,?,?) " +
-            "ON CONFLICT (id) DO UPDATE SET section_id = EXCLUDED.section_id, description = EXCLUDED.description;";
-
     private static final String FIND_SECTION = "SELECT id, description " +
             "FROM app_section WHERE id=?;";
 
@@ -32,10 +27,6 @@ public class ClassifiersRepository {
 
     private static final String FIND_ALL_SECTION =
             "SELECT id, description, parent FROM app_section";
-
-    private static final String FIND_GROUPS_BY_SECTION_CODE =
-            "SELECT id, section_id, description " +
-                    "FROM public.app_group WHERE section_id =?;";
 
     @Autowired
     private JdbcTemplate jdbcTemplate;
@@ -52,7 +43,6 @@ public class ClassifiersRepository {
         return jdbcTemplate.query(FIND_ALL_SECTION, (rs, i) -> SectionDto.builder()
                 .id(rs.getString("id"))
                 .description(rs.getString("description"))
-                .parent(rs.getString("parent"))
                 .build());
     }
 
@@ -65,8 +55,8 @@ public class ClassifiersRepository {
     }
 
     @Transactional
-    public SectionDto findSectionDtoByParent(String parentId) {
-        return jdbcTemplate.queryForObject(FIND_SECTION_BY_PARENT, (rs, i) -> SectionDto.builder()
+    public List<SectionDto> findSectionDtoByParent(String parentId) {
+        return jdbcTemplate.query(FIND_SECTION_BY_PARENT, (rs, i) -> SectionDto.builder()
                 .id(rs.getString("id"))
                 .description(rs.getString("description"))
                 .build(), parentId);
