@@ -3,16 +3,13 @@ package com.prozoro.app.demo.repository;
 import com.prozoro.app.demo.domain.SectionDto;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.List;
 
 @ActiveProfiles("test")
-@RunWith(SpringRunner.class)
 @SpringBootTest
 public class ClassifiersRepositoryTest {
 
@@ -36,9 +33,6 @@ public class ClassifiersRepositoryTest {
         List<SectionDto> section = classifiersRepository.findSectionDtoByParent("03");
         Assertions.assertNotNull(section);
     }
-
-
-
 
 
 }
