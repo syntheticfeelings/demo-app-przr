@@ -18,8 +18,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @ActiveProfiles("test")
-@RunWith(SpringRunner.class)
 @SpringBootTest
+@RunWith(SpringRunner.class)
 class ClassifiersServiceTest {
 
     @Autowired
@@ -27,12 +27,6 @@ class ClassifiersServiceTest {
 
     @MockBean
     private ClassifiersRepository repository;
-
-
-    @Test
-    void updateClassifiersData() {
-
-    }
 
     @Test
     void findAllSectionDto() {
