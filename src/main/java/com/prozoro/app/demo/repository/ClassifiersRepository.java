@@ -43,6 +43,7 @@ public class ClassifiersRepository {
         return jdbcTemplate.query(FIND_ALL_SECTION, (rs, i) -> SectionDto.builder()
                 .id(rs.getString("id"))
                 .description(rs.getString("description"))
+                .parent(rs.getString("parent"))
                 .build());
     }
 

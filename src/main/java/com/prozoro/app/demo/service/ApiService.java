@@ -10,7 +10,6 @@ import org.springframework.web.client.RestTemplate;
 import java.util.Collection;
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.regex.Pattern;
 
 @Slf4j
 @Service
@@ -37,18 +36,36 @@ public class ApiService {
         Map<String, SectionDto> sections = new TreeMap<>();
         log.info("transform data ...");
         data.forEach((code, description) -> {
-            String sectionCode = code.substring(0, 2);
 
-            if(code.matches("\\d{0,2}[0]{6}..")){
+            if (code.matches("\\d{0,2}[0]{6}..")) {
                 SectionDto section = new SectionDto(code, description, "00");
                 sections.put(code, section);
             }
-            if (code.matches("...[0]{5}..")&&!code.matches("\\d{0,2}[0]{6}..")) {
-                SectionDto section = new SectionDto(code, description, sectionCode);
+            if (code.matches("...[0]{5}..") && !code.matches("\\d{0,2}[0]{6}..")) {
+                SectionDto section = new SectionDto(code, description, code.substring(0, 2));
+                sections.put(code, section);
+            }
+            if (code.matches(".([1-9]){3}[0]{4}..")) {
+                SectionDto section = new SectionDto(code, description, code.substring(0, 3));
+                sections.put(code, section);
+            }
+            if (code.matches(".([1-9]){4}[0]{3}..")) {
+                SectionDto section = new SectionDto(code, description, code.substring(0, 4));
+                sections.put(code, section);
+            }
+            if (code.matches(".([1-9]){5}[0]{2}..")) {
+                SectionDto section = new SectionDto(code, description, code.substring(0, 5));
+                sections.put(code, section);
+            }
+            if (code.matches(".([1-9]){6}[0]..")) {
+                SectionDto section = new SectionDto(code, description, code.substring(0, 6));
+                sections.put(code, section);
+            }
+            if (code.matches(".([1-9]){7}..")) {
+                SectionDto section = new SectionDto(code, description, code.substring(0, 7));
                 sections.put(code, section);
             }
 
-            //TODO написать реальзацию
         });
         log.info("transform data finished");
         return sections.values();
